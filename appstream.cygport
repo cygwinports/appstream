@@ -1,0 +1,54 @@
+inherit meson
+
+NAME="appstream"
+VERSION=0.11.7
+RELEASE=1
+CATEGORY="Libs"
+SUMMARY="AppStream metadata library"
+DESCRIPTION="AppStream is a cross-distribution effort for enhancing the way
+we interact with the software repositories provided by distributions by
+standardizing software component metadata."
+HOMEPAGE="https://www.freedesktop.org/wiki/Distributions/AppStream/"
+SRC_URI="https://www.freedesktop.org/software/appstream/releases/AppStream-${VERSION}.tar.xz"
+SRC_DIR="AppStream-${VERSION}"
+PATCH_URI="0.11.7-local-metainfo.patch"
+
+PKG_NAMES="appstream libappstream4 libappstream-devel libappstream-doc
+	girepository-AppStream1.0 vala-appstream
+	libAppStreamQt2 libAppStreamQt-devel"
+appstream_CATEGORY="Devel"
+appstream_SUMMARY="AppStream metadata utility"
+appstream_CONTENTS="
+	--exclude=html
+	etc/appstream.conf
+	usr/bin/appstreamcli.exe
+	usr/share/doc/${NAME}
+	usr/share/gettext/its/metainfo.*
+	usr/share/locale/*/LC_MESSAGES/appstream.mo
+	usr/share/man/man1/appstreamcli.1.gz
+	usr/share/metainfo/org.freedesktop.appstream.cli.metainfo.xml
+"
+libappstream4_CONTENTS="usr/bin/cygappstream-4.dll"
+libappstream_devel_CONTENTS="
+	usr/include/appstream/
+	usr/lib/libappstream.dll.a
+	usr/lib/pkgconfig/appstream.pc
+"
+libappstream_doc_CATEGORY="Doc"
+libappstream_doc_CONTENTS="
+	usr/share/doc/appstream/html/
+	usr/share/gtk-doc/html/appstream
+"
+libAppStreamQt2_CONTENTS="usr/bin/cygAppStreamQt-2.dll"
+libAppStreamQt_devel_REQUIRES="libQt5Core-devel"
+libAppStreamQt_devel_CONTENTS="
+	usr/include/AppStreamQt/
+	usr/lib/cmake/AppStreamQt/
+	usr/lib/libAppStreamQt.dll.a
+"
+girepository_AppStream1_0_CONTENTS="usr/*/gir*-1.0/AppStream-1.0.*"
+vala_appstream_CONTENTS="usr/share/vala/vapi/appstream.*"
+
+# docs: requires publican
+# stemming: requires libstemmer
+CYGMESON_ARGS="-Ddocs=false -Dqt=true -Dvapi=true -Dstemming=false"

@@ -1,0 +1,11 @@
+--- origsrc/AppStream-0.11.7/data/appstream.conf	2017-10-22 12:36:07.000000000 -0500
++++ src/AppStream-0.11.7/data/appstream.conf	2017-12-20 00:40:07.934026700 -0600
+@@ -14,7 +14,7 @@
+ # metainfo files looks like in the software center prior to making a release
+ # containing the new metadata.
+ #
+-#PreferLocalMetainfoData=true
++PreferLocalMetainfoData=true
+ 
+ #
+ # Distribution specific settings
